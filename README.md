@@ -1,1 +1,1 @@
-coming soon https://ytan.ml/
+coming soon: https://ytan.ml
