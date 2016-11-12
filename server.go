@@ -5,14 +5,11 @@ import (
 	"net/http"
 
 	"./chat"
+	"./portal"
 )
 
-func mainHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Welcome to my page")
-}
-
 func main() {
-	http.HandleFunc("/", mainHandler)
+	http.HandleFunc("/", portal.HTTPHandler)
 	http.HandleFunc("/chat", chat.HTTPHandler)
 
 	fmt.Println("activated the web server on port 8080")
