@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"./chat"
-	"./portal"
+	"github.com/mochi8k/ytan.ml/chat"
+	"github.com/mochi8k/ytan.ml/portal"
 )
 
 func main() {

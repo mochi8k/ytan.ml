@@ -22,6 +22,22 @@
         </div>
         <input type="submit" value="送信" class="btn btn-default" />
       </form>
+      <span id="log"></span>
     </div>
   </body>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script>
+   var socket = new WebSocket('ws://{{.Host}}/chat')
+
+   socket.onopen = function() {
+     console.log('connected')
+     $('#log').text($('#log').text() + '\nConnected');
+   }
+   
+   socket.onclose = function() {
+     console.log('connection time out')
+     $('#log').text($('#log').text() + '\nDisConnected');
+   }
+
+  </script>
 </html>

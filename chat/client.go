@@ -1,7 +1,8 @@
-package main
+package chat
 
 import (
 	"github.com/gorilla/websocket"
+	"log"
 )
 
 type client struct {
@@ -11,8 +12,11 @@ type client struct {
 }
 
 func (c *client) read() {
+	log.Println("client read")
+
 	for {
-		if _, message, err := e.socket.ReadMessage(); err == nil {
+		if _, message, err := c.socket.ReadMessage(); err == nil {
+			// TODO: メソッド化
 			c.room.forwardCh <- message
 		} else {
 			break
@@ -22,6 +26,8 @@ func (c *client) read() {
 }
 
 func (c *client) write() {
+	log.Println("client write")
+
 	for message := range c.sendCh {
 		err := c.socket.WriteMessage(websocket.TextMessage, message)
 		if err != nil {
