@@ -6,7 +6,16 @@ import (
 	"net/http"
 )
 
+var isInitialized bool = false
+
 func HTTPHandler(w http.ResponseWriter, r *http.Request) {
+
+	if !isInitialized {
+		room := newRoom()
+		go room.run()
+		isInitialized = true
+	}
+
 	log.Println("start chat")
 
 	data := map[string]interface{}{

@@ -1,7 +1,9 @@
 package chat
 
 import (
+	"github.com/gorilla/websocket"
 	"log"
+	"net/http"
 )
 
 type room struct {
@@ -10,6 +12,53 @@ type room struct {
 	leaveCh   chan *client
 	// TODO: map[int]*clientのほうが良い?
 	clients map[*client]bool
+}
+
+func newRoom() *room {
+	return &room{
+		forwardCh: make(chan []byte),
+		joinCh:    make(chan *client),
+		leaveCh:   make(chan *client),
+		clients:   make(map[*client]bool),
+	}
+}
+
+const (
+	socketBufferSize  = 1024
+	messageBufferSize = 256
+)
+
+var upgrader = &websocket.Upgrader{
+	ReadBufferSize:  socketBufferSize,
+	WriteBufferSize: socketBufferSize,
+}
+
+func (r *room) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+
+	// WebSocketコネクションを取得
+	socket, err := upgrader.Upgrade(w, req, nil)
+
+	if err != nil {
+		log.Fatal("ServeHttp:", err)
+		return
+	}
+
+	client := &client{
+		socket: socket,
+		sendCh: make(chan []byte, messageBufferSize),
+		room:   r,
+	}
+
+	r.joinCh <- client
+
+	defer func() {
+		r.leaveCh <- client
+	}()
+
+	go client.write()
+
+	client.read()
+
 }
 
 func (r *room) run() {

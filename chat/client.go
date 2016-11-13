@@ -11,6 +11,14 @@ type client struct {
 	room   *room
 }
 
+// func newClient(*socket, sendCh, *room) *clinet {
+// 	return &client{
+// 		socket: socket,
+// 		sendCh: sendCh,
+// 		room:   room,
+// 	}
+// }
+
 func (c *client) read() {
 	log.Println("client read")
 
