@@ -1,12 +1,13 @@
 <html>
   <head>
-    <title>チャット</title>
+    <title>Chat</title>
     <link rel="stylesheet"
           href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <style>
       ul#messages { list-style: none; }
       ul#messages li { margin-bottom: 2px; }
       ul#messages li img { margin-right: 10px; }
+	  .panel { margin-top: 20px; }
     </style>
   </head>
   <body>
@@ -18,9 +19,9 @@
       </div>
       <form id="chatbox" role="form">
         <div class="form-group">
-          <textarea id="message" class="form-control"></textarea>
+          <input type="text" id="message" class="form-control" placeholder="Please enter the message here"></input>
         </div>
-        <input type="submit" value="送信" class="btn btn-default" />
+        <input type="submit" value="Submit" class="btn btn-default" />
       </form>
       <span id="log"></span>
     </div>
