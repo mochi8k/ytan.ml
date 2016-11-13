@@ -27,7 +27,7 @@
   </body>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script>
-   var socket = new WebSocket('ws://{{.Host}}/chat')
+   var socket = new WebSocket('ws://{{.Host}}/chat/room')
 
    socket.onopen = function() {
      console.log('connected')
@@ -38,6 +38,16 @@
      console.log('connection time out')
      $('#log').text($('#log').text() + '\nDisConnected');
    }
+
+   socket.onmessage = function(e) {
+	 $('#messages').append($('<li>').text(e.data));
+   }
+
+   $('#chatbox').submit(function() {
+	 var message = $('#message').val();
+	 socket.send(message);
+	 return false;
+   });
 
   </script>
 </html>

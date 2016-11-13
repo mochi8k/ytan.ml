@@ -8,11 +8,17 @@ import (
 
 var isInitialized bool = false
 
+// HttpHandler main handler of chat
 func HTTPHandler(w http.ResponseWriter, r *http.Request) {
 
 	if !isInitialized {
+		log.Println("chat initialize")
+
 		room := newRoom()
+		http.Handle("/chat/room", room)
+
 		go room.run()
+
 		isInitialized = true
 	}
 

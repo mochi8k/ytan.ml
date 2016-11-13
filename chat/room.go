@@ -58,7 +58,6 @@ func (r *room) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	go client.write()
 
 	client.read()
-
 }
 
 func (r *room) run() {

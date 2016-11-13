@@ -11,19 +11,13 @@ type client struct {
 	room   *room
 }
 
-// func newClient(*socket, sendCh, *room) *clinet {
-// 	return &client{
-// 		socket: socket,
-// 		sendCh: sendCh,
-// 		room:   room,
-// 	}
-// }
-
 func (c *client) read() {
 	log.Println("client read")
 
 	for {
 		if _, message, err := c.socket.ReadMessage(); err == nil {
+			log.Println("送信するメッセージ:", message)
+
 			// TODO: メソッド化
 			c.room.forwardCh <- message
 		} else {
