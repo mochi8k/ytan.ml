@@ -35,6 +35,8 @@ var upgrader = &websocket.Upgrader{
 
 func (r *room) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
+	log.Println("room join")
+
 	// WebSocketコネクションを取得
 	socket, err := upgrader.Upgrade(w, req, nil)
 
@@ -57,7 +59,9 @@ func (r *room) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 	go client.write()
 
+	// 別スレッドで実行するとdeferが実行されるため、メインスレッドで実行.
 	client.read()
+
 }
 
 func (r *room) run() {
