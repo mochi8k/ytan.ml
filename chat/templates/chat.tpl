@@ -27,17 +27,7 @@
   </body>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script>
-   var socket = new WebSocket('ws://{{.Host}}/chat/room')
-
-   socket.onopen = function() {
-     console.log('connected')
-     $('#log').text($('#log').text() + '\nConnected');
-   }
-   
-   socket.onclose = function() {
-     console.log('connection time out')
-     $('#log').text($('#log').text() + '\nDisConnected');
-   }
+   var socket = new WebSocket('ws://{{.Host}}/chat/room');
 
    socket.onmessage = function(e) {
 	 $('#messages').append($('<li>').text(e.data));
