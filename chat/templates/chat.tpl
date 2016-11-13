@@ -36,6 +36,8 @@
    $('#chatbox').submit(function() {
 	 var message = $('#message').val();
 	 socket.send(message);
+	 $('#message').val('');
+	 
 	 return false;
    });
 
