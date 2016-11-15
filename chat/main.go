@@ -22,7 +22,7 @@ func HTTPHandler(w http.ResponseWriter, r *http.Request) {
 		isInitialized = true
 	}
 
-	log.Println("start chat")
+	log.Println("/chat")
 
 	data := map[string]interface{}{
 		"Host": r.Host,

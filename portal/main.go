@@ -1,13 +1,13 @@
 package portal
 
 import (
-	"fmt"
+	"log"
 	"html/template"
 	"net/http"
 )
 
 func HTTPHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("portal")
+	log.Println("/portal")
 
 	// TODO: absolute path -> relative path
 	tpl, _ := template.ParseFiles("portal/templates/portal.tpl")
