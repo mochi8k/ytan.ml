@@ -18,14 +18,16 @@ func AuthHandler(w http.ResponseWriter, r *http.Request) {
 
 	// TODO: セッション管理
 	r.ParseForm()
-	log.Println(r.Form)
+
+	log.Println(r.Form["userName"])
+	// session := newSession(r.Form["userName"])
 
 	// 有効期限: 1分
 	expiration := time.Now().Add(1 * time.Minute)
 
 	http.SetCookie(w, &http.Cookie{
-		Name:    "auth",
-		Value:   "session_id", // TODO ユニーク
+		Name: "auth",
+		// Value:   session.getSessionID().String(),
 		Expires: expiration,
 	})
 
