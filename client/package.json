@@ -1,0 +1,12 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Yuto Tannaka",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^2.5.3",
+    "vue-loader": "^13.4.0",
+    "webpack": "^3.8.1"
+  }
+}
