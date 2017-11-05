@@ -1,12 +1,27 @@
+var webpack = require('webpack');
+
 module.exports = {
-    entry: './src/main.js',
+    entry: `${__dirname}/src/main.js`,
     output: {
         path: `${__dirname}/build`,
+        publicPath: `${__dirname}/build`,
         filename: 'build.js'
     },
     module: {
-        loaders: [
-            { test: /\.vue$/, loader: 'vue' },
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: 'babel-loader'
+            },
+            {
+                test: /\.vue$/,
+                use: 'vue'
+            }
         ]
-    }
+    },
+    devtool: 'inline-source-map',
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ]
 };
